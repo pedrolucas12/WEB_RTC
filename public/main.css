@@ -1,10 +1,11 @@
 body {
-    background: #ECEFF1;
-    color: rgba(0, 0, 0, 0.87);
+    background: #000623b8;
+    color: rgba(255, 255, 255, 0.87);
     font-family: Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
+
 
 #message {
     background: white;
@@ -71,20 +72,60 @@ body {
     margin: 1em;
 }
 
+/* Button styles */
 button {
-    margin: 0.2em 0.1em;
+    margin: 0.5em 0.3em;
 }
 
+/* Adjust the layout for the videos */
 div#videos {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 div#videos > video {
     background: black;
-    width: 640px;
-    height: 100%;
+    width: 320px;
+    height: auto;
     display: block;
     margin: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    background-color: #000623b8;
+}
+
+/* Navbar adjustments */
+.navbar .navbar-brand {
+    font-weight: bold;
+    color: white
+}
+
+.navbar .nav-link {
+    color:  rgb(255, 255, 255);
+}
+
+.navbar .nav-link:hover {
+    color: #039be5;
+}
+
+/* Footer adjustments */
+footer {
+    padding: 20px 0;
+    font-size: 14px;
+    color: white;
+    background-color: #000623b8;
+}
+
+footer a {
+    color: #039be5;
+}
+
+footer a:hover {
+    color: #ffa100;
 }

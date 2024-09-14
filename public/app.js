@@ -69,7 +69,9 @@ async function createRoom() {
   roomId = roomRef.id;
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   document.querySelector(
-      '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
+      '#currentRoom').innerText = `Current room is `;
+  document.querySelector(
+      '#currentId').innerText = `${roomRef.id}`
   // Code for creating a room above
 
   peerConnection.addEventListener('track', event => {
@@ -220,6 +222,7 @@ async function hangUp(e) {
   document.querySelector('#createBtn').disabled = true;
   document.querySelector('#hangupBtn').disabled = true;
   document.querySelector('#currentRoom').innerText = '';
+  document.querySelector('#currentId').innerText = '';
 
   // Delete room on hangup
   if (roomId) {
