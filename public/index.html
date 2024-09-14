@@ -52,6 +52,17 @@
             <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
             <span class="mdc-button__label">Desligar</span>
         </button>
+        <button class="mdc-button mdc-button--raised" id="toggleCameraBtn" style="
+            display: none; 
+            position: fixed; 
+            bottom: 10%; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 1000;
+        ">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
+            <span class="mdc-button__label">Ligar / desligar câmera</span>
+        </button>
     </div>
     <div>
         <span id="currentRoom"></span> <!-- Use roomId here -->
@@ -131,6 +142,12 @@
     </div>
     <div class="mdc-dialog__scrim"></div>
 </div>
+
+
+<!-- <button class="mdc-button mdc-button--raised" id="toggleMicBtn" style="display: none;">
+    <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
+    <span class="mdc-button__label">Ligar / desligar microfone</span>
+</button> -->
 
 <script src="app.js"></script>
 

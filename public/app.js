@@ -187,18 +187,23 @@ async function joinRoomById(roomId) {
 }
 
 async function openUserMedia(e) {
-  const stream = await navigator.mediaDevices.getUserMedia(
-      {video: true, audio: true});
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  console.log('Stream:', stream); // Verifique se o stream está sendo capturado corretamente
   document.querySelector('#localVideo').srcObject = stream;
   localStream = stream;
   remoteStream = new MediaStream();
   document.querySelector('#remoteVideo').srcObject = remoteStream;
 
-  console.log('Stream:', document.querySelector('#localVideo').srcObject);
+  console.log('localStream:', localStream); // Verifique se a stream tem áudio e vídeo
+
   document.querySelector('#cameraBtn').disabled = true;
   document.querySelector('#joinBtn').disabled = false;
   document.querySelector('#createBtn').disabled = false;
   document.querySelector('#hangupBtn').disabled = false;
+
+  // Tornar os botões de "Toggle Camera" e "Toggle Mic" visíveis
+  document.querySelector('#toggleCameraBtn').style.display = 'inline-block';
+  //document.querySelector('#toggleMicBtn').style.display = 'inline-block';
 }
 
 async function hangUp(e) {
@@ -262,4 +267,42 @@ function registerPeerConnectionListeners() {
   });
 }
 
-init();
+document.querySelector('#toggleCameraBtn').addEventListener('click', toggleCamera);
+//document.querySelector('#toggleMicBtn').addEventListener('click', toggleMic);
+
+function toggleCamera() {
+  if (!localStream) {
+      console.error("Local stream is not available.");
+      return;
+  }
+  const videoTrack = localStream.getVideoTracks()[0];
+  if (videoTrack) {
+      videoTrack.enabled = !videoTrack.enabled;
+      document.querySelector('#toggleCameraBtn i').textContent = videoTrack.enabled ? 'videocam' : 'videocam_off';
+  }
+}
+// tentando o botão do mic mas o audio ta bugando
+/* function toggleMic() {
+  if (!localStream) {
+    console.error("Local stream is not available.");
+    return;
+  }
+
+  // Verificar se há alguma track de áudio no stream
+  const audioTrack = localStream.getAudioTracks()[0];
+  if (audioTrack) {
+    audioTrack.enabled = !audioTrack.enabled; // Alternar entre habilitar/desabilitar
+
+    // Atualizar o ícone do botão com base no estado atual do microfone
+    const micIcon = document.querySelector('#toggleMicBtn i');
+    if (micIcon) {
+      micIcon.textContent = audioTrack.enabled ? 'mic' : 'mic_off';
+    }
+
+    console.log(`Microphone is now ${audioTrack.enabled ? 'enabled' : 'disabled'}`);
+    console.log('Audio track available: ', localStream.getAudioTracks().length > 0);
+  } else {
+    console.error("No audio track available.");
+  }
+}*/
+init(); 

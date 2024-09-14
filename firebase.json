@@ -1,4 +1,4 @@
-{
+{ "project": "fir-rtc-89b99",
   "database": {
     "rules": "database.rules.json"
   },
