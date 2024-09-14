@@ -305,4 +305,33 @@ function toggleCamera() {
     console.error("No audio track available.");
   }
 }*/
+
+document.addEventListener('DOMContentLoaded', function() {
+  const sendButton = document.getElementById('sendButton');
+  const messageInput = document.getElementById('messageInput');
+  const messagesDiv = document.getElementById('messages');
+
+  function sendMessage() {
+      const message = messageInput.value.trim();
+      
+      if (message !== '') {
+          const newMessage = document.createElement('div');
+          newMessage.textContent = message;
+          messagesDiv.appendChild(newMessage);
+          messageInput.value = ''; // Limpa o campo de entrada
+          messagesDiv.scrollTop = messagesDiv.scrollHeight; // Rolagem automática para o fim
+      }
+  }
+
+  sendButton.addEventListener('click', sendMessage);
+
+  // Enviar mensagem ao pressionar Enter
+  messageInput.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+          event.preventDefault();
+          sendMessage(); // Chama a função diretamente
+      }
+  });
+});
+
 init(); 

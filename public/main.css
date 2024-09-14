@@ -146,3 +146,55 @@ footer a:hover {
     padding: 10px;
     font-size: 16px;
   }
+
+#chatBox {
+    position: fixed;
+    right: 50px;
+    bottom: 100px;
+    top: 100px;
+    width: 300px;
+    height: 400px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9; /* Cor de fundo do container de mensagens */
+}
+
+#messageInput {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
+#sendButton {
+    width: 60px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#sendButton:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #000; /* Cor de fundo das mensagens */
+    border-radius: 5px;
+    color: #000; /* Cor do texto das mensagens em preto */
+}
