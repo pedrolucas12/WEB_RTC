@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "fir-rtc-89b99",
-    "PedroLucasSantana": "fir-rtc-efcc0"
+    "PedroLucasSantana": "fir-rtc-efcc0",
+    "PedroLucas": "fir-rtc-efcc0"
   },
   "targets": {},
   "etags": {},
