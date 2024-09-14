@@ -1,8 +1,6 @@
 {
   "projects": {
-    "default": "fir-rtc-89b99",
-    "PedroLucasSantana": "fir-rtc-efcc0",
-    "Barreto": "trabalhoredes-de745"
+    "default": "webrt-f83c2"
   },
   "targets": {},
   "etags": {},
