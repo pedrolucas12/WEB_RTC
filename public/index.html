@@ -31,37 +31,36 @@
     </div>
 </nav>
 <!-- Main Content -->
-<h1>Bem vindo ao nosso sistema!</h1>
-<div id="buttons">
-    <button class="mdc-button mdc-button--raised" id="cameraBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
-        <span class="mdc-button__label">Permitir acesso a camera e microfone</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="createBtn" onclick="createRoom()">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-        <span class="mdc-button__label">Criar Sala</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-        <span class="mdc-button__label">Entrar na sala</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-        <span class="mdc-button__label">Desligar</span>
-    </button>
-</div>
-<div>
-    <span id="currentRoom"></span> <!-- Use roomId here -->
-    <span id="currentId"></span>
-    <button class="btn btn-outline-secondary btn-sm" id="copyButton" onclick="copyRoomId()" style="display: none;">
-        <i class="material-icons">content_copy</i> Copy Room ID
-    </button>
-</div>
-<div id="videos">
-    <video id="localVideo" muted autoplay playsinline></video>
-    <video id="remoteVideo" autoplay playsinline></video>
-</div>
- 
+<center>
+    <br><br><br>
+    <h1>Bem vindo ao nosso sistema!</h1>
+    <br>
+    <div id="buttons">
+        <button class="mdc-button mdc-button--raised" id="cameraBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
+            <span class="mdc-button__label">Permitir acesso a camera e microfone</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="createBtn" onclick="createRoom()">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+            <span class="mdc-button__label">Criar Sala</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+            <span class="mdc-button__label">Entrar na sala</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+            <span class="mdc-button__label">Desligar</span>
+        </button>
+    </div>
+    <div>
+        <span id="currentRoom"></span> <!-- Use roomId here -->
+        <span id="currentId"></span>
+        <button class="btn btn-outline-secondary btn-sm" id="copyButton" onclick="copyRoomId()" style="display: none;">
+            <i class="material-icons">content_copy</i> Copy Room ID
+        </button>
+    </div>
+</center> 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             function createRoom() {
