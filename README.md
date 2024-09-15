@@ -86,7 +86,7 @@ A aplicação oferece um botão para **compartilhamento de tela**. Ao clicar no 
 
 ### 6. **Levantando a Mão**
 
-A funcionalidade de **levantar a mão** pode ser implementada com um botão que envia um sinal visual aos demais participantes de que um usuário deseja falar. Embora o HTML atual não tenha o botão ativado, ele pode ser facilmente adicionado e conectado à lógica WebRTC e Firebase para sinalizar quando um participante "levanta a mão".
+A funcionalidade de levantar a mão é implementada com um botão que utiliza o mesmo sistema de comunicação via WebSocket, assim como o chat. Quando um usuário clica no botão de levantar a mão, uma mensagem é enviada e exibida no elemento `chatbox`, informando aos demais participantes que o usuário levantou a mão e deseja falar.
 
 ---
 
@@ -113,28 +113,33 @@ Essa arquitetura combina as capacidades do WebRTC, Firebase e WebSockets para cr
 ### Como rodar
 
 1. **Pré-requisitos**:
+
    - Você precisa do npm instalado em sua máquina. Para verificar se tem o npm, basta rodar o comando : `npm -v`. Caso nao tenha, para instalar o npm, siga as instruções em [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm).
    - Instale o Firebase CLI com o comando: `npm install -g firebase-tools`.
 
 2. **Clonar o repositório**:
+
    - Clone o repositório do projeto em sua máquina local:
      ```bash
      git clone https://github.com/pedrolucas12/WEB_RTC.git
      ```
 
 3. **Acessar a pasta do projeto**:
+
    - Acesse a pasta do projeto:
      ```bash
      cd WEB_RTC
      ```
 
 4. **Instalar as dependências**:
+
    - Instale as dependências do projeto com o comando:
      ```bash
      npm install
      ```
 
 5. **Inicializar o Firebase**:
+
    - Acesse o console do Firebase em [https://console.firebase.google.com/](https://console.firebase.google.com/).
    - Crie um novo projeto e adicione um aplicativo da web.
    - Ativar o Cloud Firestore. No console do Firebase, vá em Desenvolver > Firestore. Clique em Criar banco de dados, escolha Modo de teste e ative.
@@ -145,17 +150,17 @@ Essa arquitetura combina as capacidades do WebRTC, Firebase e WebSockets para cr
      ```bash
      firebase use --add
      ```
-  
+
 6. **Rodar o projeto**:
    - Agora que o projeto está configurado, você pode executar o servidor local do Firebase Hosting com o comando:
-    ```bash
-    firebase serve --only hosting
-    ```
+   ```bash
+   firebase serve --only hosting
+   ```
    - O servidor local será iniciado e você poderá acessar a aplicação em [http://localhost:5000](http://localhost:5000).
 
 ## Conclusão
 
-O desenvolvimento deste projeto foi uma jornada de muito aprendizado e experimentação com tecnologias modernas que são amplamente usadas em aplicações de comunicação em tempo real. Utilizamos o **WebRTC** como a base para a transmissão de áudio e vídeo entre os usuários, aproveitando sua capacidade de criar conexões P2P eficientes e de baixa latência. A integração com o **Firebase** facilitou a sinalização necessária para a comunicação entre os pares, além de oferecer uma solução confiável para o gerenciamento das salas de conferência. 
+O desenvolvimento deste projeto foi uma jornada de muito aprendizado e experimentação com tecnologias modernas que são amplamente usadas em aplicações de comunicação em tempo real. Utilizamos o **WebRTC** como a base para a transmissão de áudio e vídeo entre os usuários, aproveitando sua capacidade de criar conexões P2P eficientes e de baixa latência. A integração com o **Firebase** facilitou a sinalização necessária para a comunicação entre os pares, além de oferecer uma solução confiável para o gerenciamento das salas de conferência.
 
 Além disso, exploramos o uso de **WebSocket** para implementar o chat em tempo real, permitindo uma experiência mais rica e interativa para os usuários. A interface foi construída com **Bootstrap** e **Material Design**, garantindo uma UI moderna e responsiva, que se adapta bem a diferentes dispositivos e tamanhos de tela.
 
@@ -164,4 +169,7 @@ Durante o projeto, aprendemos bastante sobre as particularidades de comunicaçã
 Esse projeto não só nos permitiu consolidar os conceitos teóricos de redes de computadores, como também nos deu a oportunidade de criar uma aplicação prática que poderia ser usada em um cenário real. Aprendemos a lidar com problemas de latência, gestão de conexões e a importância de criar uma interface intuitiva para o usuário final. Foi uma experiência desafiadora, mas extremamente recompensadora, que nos preparou melhor para futuros projetos na área de desenvolvimento de software e redes.
 
 ## Video de apresentação
-````
+
+```
+
+```
