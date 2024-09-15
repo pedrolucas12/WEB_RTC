@@ -17,6 +17,13 @@ let localStream = null;
 let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
+let nameId = null;
+let contentId = null;
+let muteState = false;
+let screenState = false;
+let contentExists = false;
+let contentShown = false;
+
 
 function init() {
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
@@ -203,7 +210,9 @@ async function openUserMedia(e) {
 
   // Tornar os botões de "Toggle Camera" e "Toggle Mic" visíveis
   document.querySelector('#toggleCameraBtn').style.display = 'inline-block';
-  //document.querySelector('#toggleMicBtn').style.display = 'inline-block';
+  document.querySelector('#toggleMicBtn').style.display = 'inline-block';
+
+  muteToggleEnable();
 }
 
 async function hangUp(e) {
@@ -282,6 +291,7 @@ function toggleCamera() {
   }
 }
 // tentando o botão do mic mas o audio ta bugando
+
 /* function toggleMic() {
   if (!localStream) {
     console.error("Local stream is not available.");
@@ -305,6 +315,51 @@ function toggleCamera() {
     console.error("No audio track available.");
   }
 }*/
+
+function muteToggleEnable() {
+  const muteButton = document.querySelector('#muteButton');
+  
+  // Certifique-se de que o botão mute existe
+  if (!muteButton) {
+    console.error('Botão mute não encontrado.');
+    return;
+  }
+
+  // Adiciona o event listener ao botão de mute
+  muteButton.addEventListener('click', () => {
+    if (!localStream) {
+      console.error("Stream local não disponível.");
+      return;
+    }
+    
+    const audioTracks = localStream.getAudioTracks();
+    
+    if (audioTracks.length === 0) {
+      console.error("Nenhuma faixa de áudio encontrada.");
+      return;
+    }
+
+    const audioTrack = audioTracks[0];
+
+    if (!muteState) {
+      console.log("Muting");
+      muteState = true;
+      audioTrack.enabled = false; // Desativa o áudio
+      muteButton.innerText = "mic_off"; // Atualiza o ícone
+      muteButton.classList.add('toggle'); // Adiciona a classe de mutado
+    } else {
+      console.log("Unmuting");
+      muteState = false;
+      audioTrack.enabled = true; // Ativa o áudio
+      muteButton.innerText = "mic"; // Atualiza o ícone
+      muteButton.classList.remove('toggle'); // Remove a classe de mutado
+    }
+  });
+}
+
+// Chame essa função após garantir que localStream foi inicializado
+muteToggleEnable();
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const sendButton = document.getElementById('sendButton');
@@ -333,5 +388,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+
+function toggleOnContent(roomRef) {
+  document.getElementById('localVideo').srcObject = captureStream;
+  document.getElementById('screenShareButton').innerText = "stop_screen_share";
+  document.getElementById('screenShareButton').classList.add('toggle');
+  signalContentShare(roomRef);
+  screenState = true;
+  captureStream.getVideoTracks()[0].onended = () => {
+      contentToggleOff(roomRef);
+  }
+}
 
 init(); 
