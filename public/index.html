@@ -36,6 +36,7 @@
     <h1>Bem vindo ao nosso sistema!</h1>
     <br>
     <div id="buttons">
+        
         <button class="mdc-button mdc-button--raised" id="cameraBtn">
             <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
             <span class="mdc-button__label">Permitir acesso a camera e microfone</span>
@@ -52,17 +53,37 @@
             <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
             <span class="mdc-button__label">Desligar</span>
         </button>
-        <button class="mdc-button mdc-button--raised" id="toggleCameraBtn" style="
-            display: none; 
-            position: fixed; 
-            bottom: 10%; 
-            left: 50%; 
-            transform: translateX(-50%); 
+        
+        <div id="fixedButtons" style="
+            position: fixed;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
+            display: flex;
+            gap: 10px;
         ">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
-            <span class="mdc-button__label">Ligar / desligar câmera</span>
-        </button>
+            <!-- Botão de ligar/desligar câmera -->
+            <button class="mdc-button mdc-button--raised" id="toggleCameraBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
+            </button>
+
+            <!-- Botão de mute -->
+            <button class="mdc-button mdc-button--raised" id="muteButton">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
+            </button>
+            <button class="mdc-button mdc-button--raised" id="screenShareButton">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">screen_share</i>
+                <span class="mdc-button__label">Compartilhar Tela</span>
+            </button>
+            
+            <!-- Botão de rise hand-->
+            <!-- <button id="raiseHandBtn" class="mdc-button mdc-button--raised">Levantar a Mão</button> -->
+        </div>
+        
+        
+
+        
     </div>
     <div>
         <span id="currentRoom"></span> <!-- Use roomId here -->
