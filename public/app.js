@@ -23,6 +23,7 @@ let muteState = false;
 let screenState = false;
 let contentExists = false;
 let contentShown = false;
+let captureStream = null;
 
 
 function init() {
@@ -32,6 +33,7 @@ function init() {
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 }
+
 
 async function createRoom() {
   document.querySelector('#createBtn').disabled = true;
@@ -290,31 +292,6 @@ function toggleCamera() {
       document.querySelector('#toggleCameraBtn i').textContent = videoTrack.enabled ? 'videocam' : 'videocam_off';
   }
 }
-// tentando o botão do mic mas o audio ta bugando
-
-/* function toggleMic() {
-  if (!localStream) {
-    console.error("Local stream is not available.");
-    return;
-  }
-
-  // Verificar se há alguma track de áudio no stream
-  const audioTrack = localStream.getAudioTracks()[0];
-  if (audioTrack) {
-    audioTrack.enabled = !audioTrack.enabled; // Alternar entre habilitar/desabilitar
-
-    // Atualizar o ícone do botão com base no estado atual do microfone
-    const micIcon = document.querySelector('#toggleMicBtn i');
-    if (micIcon) {
-      micIcon.textContent = audioTrack.enabled ? 'mic' : 'mic_off';
-    }
-
-    console.log(`Microphone is now ${audioTrack.enabled ? 'enabled' : 'disabled'}`);
-    console.log('Audio track available: ', localStream.getAudioTracks().length > 0);
-  } else {
-    console.error("No audio track available.");
-  }
-}*/
 
 function muteToggleEnable() {
   const muteButton = document.querySelector('#muteButton');
@@ -396,8 +373,44 @@ function toggleOnContent(roomRef) {
   signalContentShare(roomRef);
   screenState = true;
   captureStream.getVideoTracks()[0].onended = () => {
-      contentToggleOff(roomRef);
+    contentToggleOff(roomRef);
   }
 }
+
+async function startScreenShare() {
+  try {
+      captureStream = await navigator.mediaDevices.getDisplayMedia({
+          video: true
+      });
+      document.querySelector('#localVideo').srcObject = captureStream;
+      document.querySelector('#screenShareButton').innerText = "stop_screen_share";
+      document.querySelector('#screenShareButton').classList.add('toggle');
+      screenState = true;
+      captureStream.getVideoTracks()[0].onended = () => {
+          stopScreenShare();
+      };
+  } catch (err) {
+      console.error("Failed to share screen:", err);
+  }
+}
+
+function stopScreenShare() {
+  if (captureStream) {
+      captureStream.getTracks().forEach(track => track.stop());
+      captureStream = null;
+      document.querySelector('#screenShareButton').innerText = "screen_share";
+      document.querySelector('#screenShareButton').classList.remove('toggle');
+      screenState = false;
+  }
+}
+
+// Adiciona o event listener ao botão de compartilhar tela
+document.querySelector('#screenShareButton').addEventListener('click', () => {
+  if (screenState) {
+      stopScreenShare();
+  } else {
+      startScreenShare();
+  }
+});
 
 init(); 
