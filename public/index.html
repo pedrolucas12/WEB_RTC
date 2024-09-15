@@ -142,11 +142,64 @@
     </div>
     <div class="mdc-dialog__scrim"></div>
 </div>
-<div id="chatBox">
-    <div id="messages"></div>
-    <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
-    <button id="sendButton">Enviar</button>
+<div id="chat-container">
+    <div id="chatbox">
+        <ul id="messages"></ul>
+    </div>
+    <div id="input-container">
+        <input type="text" id="messageInput" placeholder="Escreva sua mensagem...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
 </div>
+
+<script>
+    const ws = new WebSocket('ws://localhost:8080');
+    const messages = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const username = prompt("Digite seu nome:");
+
+    ws.onmessage = function(event) {
+        if (event.data instanceof Blob) {
+            // Se a mensagem for um Blob, converta para string
+            const reader = new FileReader();
+            reader.onload = function() {
+                const text = reader.result;
+                displayMessage(text); // Exibir a mensagem convertida em texto
+            };
+            reader.readAsText(event.data); // Lê o Blob como texto
+        } else {
+            // Se já for uma string, exibe diretamente
+            displayMessage(event.data);
+        }
+    };  
+
+    function displayMessage(message) {
+        const li = document.createElement('li');
+        li.textContent = message;
+        li.classList.add('others');
+        messages.appendChild(li);
+        scrollToBottom();
+    }
+
+
+    // Função para enviar a mensagem
+    function sendMessage() {
+        const message = messageInput.value;
+        if (message.trim() === '') return; // Evita enviar mensagens vazias
+
+        const formattedMessage = `${username}: ${message}`;
+        ws.send(formattedMessage);
+
+        messageInput.value = ''; // Limpa o campo de entrada de mensagem
+        scrollToBottom(); // Rola automaticamente para a última mensagem
+    }
+
+    // Função para rolar o chat para a última mensagem
+    function scrollToBottom() {
+        const chatbox = document.getElementById('chatbox');
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
+</script>
 
 
 <!-- <button class="mdc-button mdc-button--raised" id="toggleMicBtn" style="display: none;">
