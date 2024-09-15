@@ -24,13 +24,7 @@ let contentExists = false;
 let contentShown = false;
 let captureStream = null;
 
-/* let raisedHandId = null;
 
-const simulatedData = {
-  raisedHand: { id: 'local' }
-};
-handleRaisedHand(simulatedData);
- */
 function init() {
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);
@@ -38,7 +32,6 @@ function init() {
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 }
-
 
 async function createRoom() {
   document.querySelector('#createBtn').disabled = true;
@@ -55,7 +48,7 @@ async function createRoom() {
     peerConnection.addTrack(track, localStream);
   });
 
-  // Code for collecting ICE candidates
+  // Code for collecting ICE candidates below
   const callerCandidatesCollection = roomRef.collection('callerCandidates');
 
   peerConnection.addEventListener('icecandidate', event => {
@@ -66,8 +59,9 @@ async function createRoom() {
     console.log('Got candidate: ', event.candidate);
     callerCandidatesCollection.add(event.candidate.toJSON());
   });
+  // Code for collecting ICE candidates above
 
-  // Code for creating a room
+  // Code for creating a room below
   const offer = await peerConnection.createOffer();
   await peerConnection.setLocalDescription(offer);
   console.log('Created offer:', offer);
@@ -77,13 +71,15 @@ async function createRoom() {
       type: offer.type,
       sdp: offer.sdp,
     },
-    'raisedHand': null // Initialize with no hand raised
   };
   await roomRef.set(roomWithOffer);
   roomId = roomRef.id;
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
-  document.querySelector('#currentRoom').innerText = `Current room is ${roomId}`;
-  document.querySelector('#currentId').innerText = `${roomRef.id}`;
+  document.querySelector(
+      '#currentRoom').innerText = `Current room is `;
+  document.querySelector(
+      '#currentId').innerText = `${roomRef.id}`
+  // Code for creating a room above
 
   peerConnection.addEventListener('track', event => {
     console.log('Got remote track:', event.streams[0]);
@@ -93,27 +89,18 @@ async function createRoom() {
     });
   });
 
-  // Listening for remote session description
-/*   roomRef.onSnapshot(async snapshot => {
+  // Listening for remote session description below
+  roomRef.onSnapshot(async snapshot => {
     const data = snapshot.data();
-    handleRaisedHand(data); // Handle hand raise
     if (!peerConnection.currentRemoteDescription && data && data.answer) {
       console.log('Got remote description: ', data.answer);
       const rtcSessionDescription = new RTCSessionDescription(data.answer);
       await peerConnection.setRemoteDescription(rtcSessionDescription);
     }
-  }); */
-/*   roomRef.onSnapshot(snapshot => {
-    console.log('Snapshot received:', snapshot.data());
-    const data = snapshot.data();
-    if (data) {
-      handleRaisedHand(data); // Handle hand raise
-    } else {
-      console.log('No data found in snapshot.');
-    }
-  }); */
+  });
+  // Listening for remote session description above
 
-  // Listen for remote ICE candidates
+  // Listen for remote ICE candidates below
   roomRef.collection('calleeCandidates').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(async change => {
       if (change.type === 'added') {
@@ -123,6 +110,7 @@ async function createRoom() {
       }
     });
   });
+  // Listen for remote ICE candidates above
 }
 
 function joinRoom() {
@@ -154,7 +142,7 @@ async function joinRoomById(roomId) {
       peerConnection.addTrack(track, localStream);
     });
 
-    // Code for collecting ICE candidates
+    // Code for collecting ICE candidates below
     const calleeCandidatesCollection = roomRef.collection('calleeCandidates');
     peerConnection.addEventListener('icecandidate', event => {
       if (!event.candidate) {
@@ -164,6 +152,7 @@ async function joinRoomById(roomId) {
       console.log('Got candidate: ', event.candidate);
       calleeCandidatesCollection.add(event.candidate.toJSON());
     });
+    // Code for collecting ICE candidates above
 
     peerConnection.addEventListener('track', event => {
       console.log('Got remote track:', event.streams[0]);
@@ -173,7 +162,7 @@ async function joinRoomById(roomId) {
       });
     });
 
-    // Code for creating SDP answer
+    // Code for creating SDP answer below
     const offer = roomSnapshot.data().offer;
     console.log('Got offer:', offer);
     await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
@@ -185,11 +174,12 @@ async function joinRoomById(roomId) {
       answer: {
         type: answer.type,
         sdp: answer.sdp,
-      }
+      },
     };
     await roomRef.update(roomWithAnswer);
+    // Code for creating SDP answer above
 
-    // Listening for remote ICE candidates
+    // Listening for remote ICE candidates below
     roomRef.collection('callerCandidates').onSnapshot(snapshot => {
       snapshot.docChanges().forEach(async change => {
         if (change.type === 'added') {
@@ -199,12 +189,7 @@ async function joinRoomById(roomId) {
         }
       });
     });
-
-/*     // Listening for hand raise notifications
-    roomRef.onSnapshot(snapshot => {
-      const data = snapshot.data();
-      handleRaisedHand(data); // Handle hand raise
-    }); */
+    // Listening for remote ICE candidates above
   }
 }
 
@@ -226,8 +211,6 @@ async function openUserMedia(e) {
   // Tornar os botões de "Toggle Camera" e "Toggle Mic" visíveis
   document.querySelector('#toggleCameraBtn').style.display = 'inline-block';
   document.querySelector('#toggleMicBtn').style.display = 'inline-block';
-
-  muteToggleEnable();
 }
 
 async function hangUp(e) {
@@ -305,7 +288,6 @@ function toggleCamera() {
       document.querySelector('#toggleCameraBtn i').textContent = videoTrack.enabled ? 'videocam' : 'videocam_off';
   }
 }
-
 function muteToggleEnable() {
   const muteButton = document.querySelector('#muteButton');
   
@@ -349,7 +331,6 @@ function muteToggleEnable() {
 
 // Chame essa função após garantir que localStream foi inicializado
 muteToggleEnable();
-
 
 document.addEventListener('DOMContentLoaded', function() {
   const sendButton = document.getElementById('sendButton');
@@ -430,28 +411,5 @@ document.querySelector('#screenShareButton').addEventListener('click', () => {
   }
 });
 
-/* async function raiseHand() {
-  if (peerConnection) {
-    const db = firebase.firestore();
-    const roomRef = db.collection('rooms').doc(roomId);
-    console.log('Updating room with raised hand data...');
-    await roomRef.update({ raisedHand: { id: 'local' } });
-    console.log('Room updated with raised hand data.');
-    raisedHandId = 'local';
-  }
-} */
 
-/* function handleRaisedHand(data) {
-  console.log('Received raised hand data:', data);
-
-  if (data && data.raisedHand && data.raisedHand.id === 'local') {
-    console.log('Adding highlight border to local video.');
-    const localVideo = document.querySelector('#localVideo');
-    if (localVideo) {
-      localVideo.style.border = '5px solid yellow';
-    } else {
-      console.error('Local video element not found.');
-    }
-  }
-} */
 init(); 
