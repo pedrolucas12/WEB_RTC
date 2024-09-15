@@ -198,3 +198,8 @@ footer a:hover {
     border-radius: 5px;
     color: #000; /* Cor do texto das mensagens em preto */
 }
+
+.highlight-border {
+    border: 5px solid yellow; /* Ajuste conforme necessário */
+    box-shadow: 0 0 10px yellow; /* Opcional: para adicionar um efeito de destaque */
+  }
