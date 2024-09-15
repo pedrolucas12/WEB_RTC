@@ -1,5 +1,4 @@
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
-
 const configuration = {
   iceServers: [
     {
@@ -358,15 +357,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const messagesDiv = document.getElementById('messages');
 
   function sendMessage() {
-      const message = messageInput.value.trim();
-      
-      if (message !== '') {
-          const newMessage = document.createElement('div');
-          newMessage.textContent = message;
-          messagesDiv.appendChild(newMessage);
-          messageInput.value = ''; // Limpa o campo de entrada
-          messagesDiv.scrollTop = messagesDiv.scrollHeight; // Rolagem automática para o fim
-      }
+    const message = messageInput.value;
+    if (message.trim() === '') return;
+
+    const formattedMessage = `${username}: ${message}`;
+    ws.send(formattedMessage); // Enviar como string
+
+    const li = document.createElement('li');
+    li.textContent = `Você: ${message}`;
+    li.classList.add('you');
+    messages.appendChild(li);
+
+    messageInput.value = '';
+    scrollToBottom();
   }
 
   sendButton.addEventListener('click', sendMessage);
