@@ -37,25 +37,24 @@ A aplicação de videoconferência é construída utilizando **WebRTC** para com
 O **`index.html`** define a estrutura principal da interface do usuário e integra tanto o **Material Design** quanto o **Bootstrap** para fornecer uma experiência de usuário moderna e responsiva.
 
 - **Navbar**: Exibe a marca da aplicação e inclui a funcionalidade de colapsar para dispositivos móveis.
-  
 - **Botões principais**:
   - `cameraBtn`: Solicita permissão do usuário para acessar a câmera e o microfone, ativando a comunicação de mídia necessária para WebRTC.
   - `createBtn` e `joinBtn`: Inicialmente desativados, são habilitados após o usuário permitir o acesso à câmera e ao microfone. Eles são responsáveis por criar ou ingressar em uma sala de videoconferência.
   - `hangupBtn`: Usado para encerrar a chamada.
-  
 - **Área de Vídeo**:
+
   - Exibe dois elementos de vídeo, `localVideo` e `remoteVideo`, para mostrar o feed de vídeo do usuário e de outros participantes na sala.
 
 - **Sala e ID da Sala**:
   - A aplicação permite a criação de salas com um `roomId` único. Esse ID pode ser copiado e compartilhado para que outros usuários possam ingressar na mesma videoconferência.
 
 ---
+
 ### 3. **Firebase**: Gerenciamento de Dados
 
 O **Firebase Firestore** é utilizado para persistir as salas e gerenciar a sinalização entre os participantes da chamada. O Firestore armazena:
 
 - **IDs das salas**: Quando um usuário cria uma sala, o `roomId` é salvo no Firestore, permitindo que outros participantes acessem a mesma sala ao usar esse ID.
-  
 - **Mensagens de Sinalização**: As mensagens de sinalização (ofertas, respostas e candidatos ICE) são trocadas por meio do Firestore para facilitar a comunicação WebRTC entre os usuários.
 
 ---
@@ -113,6 +112,48 @@ Essa arquitetura combina as capacidades do WebRTC, Firebase e WebSockets para cr
 
 ### Como rodar
 
+1. **Pré-requisitos**:
+   - Você precisa do npm instalado em sua máquina. Para verificar se tem o npm, basta rodar o comando : `npm -v`. Caso nao tenha, para instalar o npm, siga as instruções em [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm).
+   - Instale o Firebase CLI com o comando: `npm install -g firebase-tools`.
+
+2. **Clonar o repositório**:
+   - Clone o repositório do projeto em sua máquina local:
+     ```bash
+     git clone https://github.com/pedrolucas12/WEB_RTC.git
+     ```
+
+3. **Acessar a pasta do projeto**:
+   - Acesse a pasta do projeto:
+     ```bash
+     cd WEB_RTC
+     ```
+
+4. **Instalar as dependências**:
+   - Instale as dependências do projeto com o comando:
+     ```bash
+     npm install
+     ```
+
+5. **Inicializar o Firebase**:
+   - Acesse o console do Firebase em [https://console.firebase.google.com/](https://console.firebase.google.com/).
+   - Crie um novo projeto e adicione um aplicativo da web.
+   - Ativar o Cloud Firestore. No console do Firebase, vá em Desenvolver > Firestore. Clique em Criar banco de dados, escolha Modo de teste e ative.
+   - Associe o Projeto Firebase ao projeto local com os comandos:
+     ```bash
+     firebase login
+     ```
+     ```bash
+     firebase use --add
+     ```
+  
+6. **Rodar o projeto**:
+  - Agora que o projeto está configurado, você pode executar o servidor local do Firebase Hosting com o comando:
+    ```bash
+    firebase serve --only hosting
+    ```
+  - O servidor local será iniciado e você poderá acessar a aplicação em [http://localhost:5000](http://localhost:5000).
+
 ## Conclusão
 
 ## Video de apresentação
+````
