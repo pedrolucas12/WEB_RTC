@@ -5,7 +5,7 @@
 - **Alunos**:
   - João Manoel Barreto Neto - 211039519
   - Pablo Guilherme de Jesus Batista Silva - 200025791
-  - Pedro Lucas Garcia - 190115548
+  - Pedro Lucas Figueiredo Santana - 202017049
   - Weslley Alves de Barros - 200044567
 
 ## Introdução
