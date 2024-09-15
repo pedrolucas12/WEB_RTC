@@ -147,13 +147,21 @@ Essa arquitetura combina as capacidades do WebRTC, Firebase e WebSockets para cr
      ```
   
 6. **Rodar o projeto**:
-  - Agora que o projeto está configurado, você pode executar o servidor local do Firebase Hosting com o comando:
+   - Agora que o projeto está configurado, você pode executar o servidor local do Firebase Hosting com o comando:
     ```bash
     firebase serve --only hosting
     ```
-  - O servidor local será iniciado e você poderá acessar a aplicação em [http://localhost:5000](http://localhost:5000).
+   - O servidor local será iniciado e você poderá acessar a aplicação em [http://localhost:5000](http://localhost:5000).
 
 ## Conclusão
+
+O desenvolvimento deste projeto foi uma jornada de muito aprendizado e experimentação com tecnologias modernas que são amplamente usadas em aplicações de comunicação em tempo real. Utilizamos o **WebRTC** como a base para a transmissão de áudio e vídeo entre os usuários, aproveitando sua capacidade de criar conexões P2P eficientes e de baixa latência. A integração com o **Firebase** facilitou a sinalização necessária para a comunicação entre os pares, além de oferecer uma solução confiável para o gerenciamento das salas de conferência. 
+
+Além disso, exploramos o uso de **WebSocket** para implementar o chat em tempo real, permitindo uma experiência mais rica e interativa para os usuários. A interface foi construída com **Bootstrap** e **Material Design**, garantindo uma UI moderna e responsiva, que se adapta bem a diferentes dispositivos e tamanhos de tela.
+
+Durante o projeto, aprendemos bastante sobre as particularidades de comunicação P2P, como a troca de ofertas e respostas SDP, o processo de negociação ICE, e os desafios de manter a qualidade de mídia em diferentes condições de rede. Também aprimoramos nossas habilidades em trabalhar com APIs de navegadores, como `getUserMedia` e `getDisplayMedia`, que foram fundamentais para capturar e compartilhar o vídeo e o áudio dos usuários.
+
+Esse projeto não só nos permitiu consolidar os conceitos teóricos de redes de computadores, como também nos deu a oportunidade de criar uma aplicação prática que poderia ser usada em um cenário real. Aprendemos a lidar com problemas de latência, gestão de conexões e a importância de criar uma interface intuitiva para o usuário final. Foi uma experiência desafiadora, mas extremamente recompensadora, que nos preparou melhor para futuros projetos na área de desenvolvimento de software e redes.
 
 ## Video de apresentação
 ````
