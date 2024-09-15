@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,41 +21,43 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
+
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">MeetingRTC</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>   
-    </div>
-</nav>
-<!-- Main Content -->
-<center>
-    <br><br><br>
-    <h1>Bem vindo ao nosso sistema!</h1>
-    <br>
-    <div id="buttons">
-        
-        <button class="mdc-button mdc-button--raised" id="cameraBtn">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
-            <span class="mdc-button__label">Permitir acesso a camera e microfone</span>
-        </button>
-        <button class="mdc-button mdc-button--raised" disabled id="createBtn" onclick="createRoom()">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-            <span class="mdc-button__label">Criar Sala</span>
-        </button>
-        <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-            <span class="mdc-button__label">Entrar na sala</span>
-        </button>
-        <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
-            <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
-            <span class="mdc-button__label">Desligar</span>
-        </button>
-        
-        <div id="fixedButtons" style="
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MeetingRTC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <center>
+        <br><br><br>
+        <h1>Bem vindo ao nosso sistema!</h1>
+        <br>
+        <div id="buttons">
+
+            <button class="mdc-button mdc-button--raised" id="cameraBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">perm_camera_mic</i>
+                <span class="mdc-button__label">Permitir acesso a camera e microfone</span>
+            </button>
+            <button class="mdc-button mdc-button--raised" disabled id="createBtn" onclick="createRoom()">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+                <span class="mdc-button__label">Criar Sala</span>
+            </button>
+            <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+                <span class="mdc-button__label">Entrar na sala</span>
+            </button>
+            <button class="mdc-button mdc-button--raised" disabled id="hangupBtn">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                <span class="mdc-button__label">Desligar</span>
+            </button>
+
+            <div id="fixedButtons" style="
             position: fixed;
             bottom: 15%;
             left: 50%;
@@ -63,53 +66,61 @@
             display: flex;
             gap: 10px;
         ">
-            <!-- Botão de ligar/desligar câmera -->
-            <button class="mdc-button mdc-button--raised" id="toggleCameraBtn">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
-            </button>
+                <!-- Botão de ligar/desligar câmera -->
+                <button class="mdc-button mdc-button--raised" id="toggleCameraBtn">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">videocam</i>
+                </button>
 
-            <!-- Botão de mute -->
-            <button class="mdc-button mdc-button--raised" id="muteButton">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
-            </button>
-            <button class="mdc-button mdc-button--raised" id="screenShareButton">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">screen_share</i>
-                <span class="mdc-button__label">Compartilhar Tela</span>
-            </button>
-            
-            <!-- Botão de rise hand-->
-            <!-- <button id="raiseHandBtn" class="mdc-button mdc-button--raised">Levantar a Mão</button> -->
+                <!-- Botão de mute -->
+                <button class="mdc-button mdc-button--raised" id="muteButton">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
+                </button>
+
+                <!-- Levantar a mão -->
+                <button class="mdc-button mdc-button--raised" id="toggleCameraBtn" onclick="levarMao()">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">front_hand</i>
+                </button>
+
+
+                <!-- Botão de compartilhar tela -->
+                <button class="mdc-button mdc-button--raised" id="screenShareButton">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">screen_share</i>
+                    <span class="mdc-button__label">Compartilhar Tela</span>
+                </button>
+
+
+            </div>
+
+
+
+
         </div>
-        
-        
-
-        
-    </div>
-    <div>
-        <span id="currentRoom"></span> <!-- Use roomId here -->
-        <span id="currentId"></span>
-        <button class="btn btn-outline-secondary btn-sm" id="copyButton" onclick="copyRoomId()" style="display: none;">
-            <i class="material-icons">content_copy</i> Copy Room ID
-        </button>
-    </div>
-</center> 
+        <div>
+            <span id="currentRoom"></span> <!-- Use roomId here -->
+            <span id="currentId"></span>
+            <button class="btn btn-outline-secondary btn-sm" id="copyButton" onclick="copyRoomId()"
+                style="display: none;">
+                <i class="material-icons">content_copy</i> Copy Room ID
+            </button>
+        </div>
+    </center>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             function createRoom() {
                 // Código para criar a sala (não incluído no exemplo)
-                
+
                 // Simula a definição do texto do roomId
                 document.getElementById("currentId").innerText = "x6kTmFw7cMDm9PNYXvOr";
-                
+
                 // Torna o botão "Copy Room ID" visível
                 document.getElementById("copyButton").style.display = "inline-block";
             }
 
             function copyRoomId() {
                 var roomId = document.getElementById("currentId").innerText;
-                navigator.clipboard.writeText(roomId).then(function() {
+                navigator.clipboard.writeText(roomId).then(function () {
                     alert("Room ID copied: " + roomId);
-                }, function(err) {
+                }, function (err) {
                     alert("Failed to copy: " + err);
                 });
             }
@@ -126,110 +137,127 @@
         <video id="remoteVideo" autoplay playsinline class="border"></video>
     </div>
 
-<!-- Footer -->
-<footer class="text-center text-lg-start mt-5 fixed-bottom">
-    <div class="text-center p-3">
-        © 2024 MeetingRTC
-    </div>
-</footer>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start mt-5 fixed-bottom">
+        <div class="text-center p-3">
+            © 2024 MeetingRTC
+        </div>
+    </footer>
 
-<!-- Dialog -->
-<div class="mdc-dialog"
-    id="room-dialog"
-    role="alertdialog"
-    aria-modal="true"
-    aria-labelledby="my-dialog-title"
-    aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
-            <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter ID for room to join:
-                <div class="mdc-text-field">
-                    <input type="text" id="room-id" class="mdc-text-field__input">
-                    <label class="mdc-floating-label" for="room-id">Room ID</label>
-                    <div class="mdc-line-ripple"></div>
+    <!-- Dialog -->
+    <div class="mdc-dialog" id="room-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter ID for room to join:
+                    <div class="mdc-text-field">
+                        <input type="text" id="room-id" class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="room-id">Room ID</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
                 </div>
+                <footer class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">Cancel</span>
+                    </button>
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
+                        data-mdc-dialog-action="yes">
+                        <span class="mdc-button__label">Join</span>
+                    </button>
+                </footer>
             </div>
-            <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">Cancel</span>
-                </button>
-                <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label">Join</span>
-                </button>
-            </footer>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div id="chat-container">
+        <div id="chatbox">
+            <ul id="messages"></ul>
+        </div>
+        <div id="input-container">
+            <input type="text" id="messageInput" placeholder="Escreva sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
-<div id="chat-container">
-    <div id="chatbox">
-        <ul id="messages"></ul>
-    </div>
-    <div id="input-container">
-        <input type="text" id="messageInput" placeholder="Escreva sua mensagem...">
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
-</div>
 
-<script>
-    const ws = new WebSocket('ws://localhost:8080');
-    const messages = document.getElementById('messages');
-    const messageInput = document.getElementById('messageInput');
-    const username = prompt("Digite seu nome:");
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const username = prompt("Digite seu nome:");
 
-    ws.onmessage = function(event) {
-        if (event.data instanceof Blob) {
-            // Se a mensagem for um Blob, converta para string
-            const reader = new FileReader();
-            reader.onload = function() {
-                const text = reader.result;
-                displayMessage(text); // Exibir a mensagem convertida em texto
-            };
-            reader.readAsText(event.data); // Lê o Blob como texto
-        } else {
-            // Se já for uma string, exibe diretamente
-            displayMessage(event.data);
+        ws.onmessage = function (event) {
+            if (event.data instanceof Blob) {
+                // Se a mensagem for um Blob, converta para string
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const text = reader.result;
+                    displayMessage(text); // Exibir a mensagem convertida em texto
+                };
+                reader.readAsText(event.data); // Lê o Blob como texto
+            } else {
+                // Se já for uma string, exibe diretamente
+                displayMessage(event.data);
+            }
+        };
+
+        function displayMessage(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            li.classList.add('others');
+            messages.appendChild(li);
+            scrollToBottom();
         }
-    };  
-
-    function displayMessage(message) {
-        const li = document.createElement('li');
-        li.textContent = message;
-        li.classList.add('others');
-        messages.appendChild(li);
-        scrollToBottom();
-    }
 
 
-    // Função para enviar a mensagem
-    function sendMessage() {
-        const message = messageInput.value;
-        if (message.trim() === '') return; // Evita enviar mensagens vazias
+        // Função para enviar a mensagem
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() === '') return; // Evita enviar mensagens vazias
 
-        const formattedMessage = `${username}: ${message}`;
-        ws.send(formattedMessage);
+            const formattedMessage = `${username}: ${message}`;
+            ws.send(formattedMessage);
 
-        messageInput.value = ''; // Limpa o campo de entrada de mensagem
-        scrollToBottom(); // Rola automaticamente para a última mensagem
-    }
+            messageInput.value = ''; // Limpa o campo de entrada de mensagem
+            scrollToBottom(); // Rola automaticamente para a última mensagem
+        }
 
-    // Função para rolar o chat para a última mensagem
-    function scrollToBottom() {
-        const chatbox = document.getElementById('chatbox');
-        chatbox.scrollTop = chatbox.scrollHeight;
-    }
-</script>
+        // Função para enviar a mensagem
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() === '') return; // Evita enviar mensagens vazias
+
+            const formattedMessage = `${username}: ${message}`;
+            ws.send(formattedMessage);
+
+            messageInput.value = ''; // Limpa o campo de entrada de mensagem
+            scrollToBottom(); // Rola automaticamente para a última mensagem
+        }
+
+        function levarMao() {
+
+            const formattedMessage = `${username} levantou a mão`;
+            ws.send(formattedMessage);
+            scrollToBottom(); // Rola automaticamente para a última mensagem
+        }
+
+        // Função para rolar o chat para a última mensagem
+        function scrollToBottom() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
 
 
-<!-- <button class="mdc-button mdc-button--raised" id="toggleMicBtn" style="display: none;">
+    <!-- <button class="mdc-button mdc-button--raised" id="toggleMicBtn" style="display: none;">
     <i class="material-icons mdc-button__icon" aria-hidden="true">mic</i>
     <span class="mdc-button__label">Ligar / desligar microfone</span>
 </button> -->
 
-<script src="app.js"></script>
-<script src="script.js"></script>
-<script src="script.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
