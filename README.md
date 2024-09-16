@@ -170,6 +170,4 @@ Esse projeto não só nos permitiu consolidar os conceitos teóricos de redes de
 
 ## Video de apresentação
 
-```
-
-```
+[![Watch the video]([https://i.sstatic.net/Vp2cE.png](https://i.ytimg.com/vi/iq-WuVOYyDQ/sd1.jpg))]([https://youtu.be/vt5fpE0bzSY](https://www.youtube.com/watch?v=iq-WuVOYyDQ))
