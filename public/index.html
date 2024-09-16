@@ -184,8 +184,11 @@
     <script>
 
         const urlHost = window.location.host;
-        const wsUrl = (urlHost === 'webrt-f83c2.web.app') ? 'wss//web-rtc-i6u8.onrender.com:10000' : 'ws://localhost:8080';
-        const ws = new WebSocket(wsUrl);
+        const wsUrl = (urlHost === 'webrt-f83c2.web.app') ? 'wss://web-rtc-i6u8.onrender.com:10000' : 'ws://localhost:8080';
+        const ws = new WebSocket(
+            wsUrl,
+            "protocolOne"
+        )
         const messages = document.getElementById('messages');
         const messageInput = document.getElementById('messageInput');
         const username = prompt("Digite seu nome:");
