@@ -226,17 +226,13 @@
             scrollToBottom(); // Rola automaticamente para a última mensagem
         }
 
-        // Função para enviar a mensagem
-        function sendMessage() {
-            const message = messageInput.value;
-            if (message.trim() === '') return; // Evita enviar mensagens vazias
-
-            const formattedMessage = `${username}: ${message}`;
-            ws.send(formattedMessage);
-
-            messageInput.value = ''; // Limpa o campo de entrada de mensagem
-            scrollToBottom(); // Rola automaticamente para a última mensagem
-        }
+        // Adiciona um ouvinte de eventos ao campo de entrada
+        document.getElementById('messageInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita o comportamento padrão do Enter
+                sendMessage(); // Chama a função sendMessage() diretamente
+            }
+        });
 
         function levarMao() {
 
