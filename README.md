@@ -170,4 +170,6 @@ Esse projeto não só nos permitiu consolidar os conceitos teóricos de redes de
 
 ## Video de apresentação
 
-[Projeto Final da matéria Fundamento de Redes e Computadores](https://youtu.be/iq-WuVOYyDQ).
+[<img src="https://img.youtube.com/vi/iq-WuVOYyDQ/maxresdefault.jpg" width="100%">](https://youtu.be/iq-WuVOYyDQ)
+
+
