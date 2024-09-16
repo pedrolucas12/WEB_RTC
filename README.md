@@ -50,15 +50,6 @@ O **`index.html`** define a estrutura principal da interface do usuário e integ
 
 ---
 
-### 3. **Firebase**: Gerenciamento de Dados
-
-O **Firebase Firestore** é utilizado para persistir as salas e gerenciar a sinalização entre os participantes da chamada. O Firestore armazena:
-
-- **IDs das salas**: Quando um usuário cria uma sala, o `roomId` é salvo no Firestore, permitindo que outros participantes acessem a mesma sala ao usar esse ID.
-- **Mensagens de Sinalização**: As mensagens de sinalização (ofertas, respostas e candidatos ICE) são trocadas por meio do Firestore para facilitar a comunicação WebRTC entre os usuários.
-
----
-
 ### 2. **WebRTC**: Comunicação em Tempo Real
 
 O **WebRTC** é a base da comunicação de vídeo e áudio entre os usuários. O fluxo principal envolve:
@@ -66,6 +57,15 @@ O **WebRTC** é a base da comunicação de vídeo e áudio entre os usuários. O
 - **Captura de Mídia**: Ao clicar no botão "Permitir acesso à câmera e microfone", a aplicação utiliza a API `getUserMedia` do navegador para capturar o vídeo e o áudio do usuário. Esse fluxo de mídia é exibido no elemento `localVideo` e, posteriormente, compartilhado com outros participantes.
 
 - **Conexões Peer-to-Peer (P2P)**: Após a criação de uma sala, o WebRTC estabelece conexões diretas entre os clientes, permitindo a troca de fluxos de áudio e vídeo em tempo real. Esse processo é facilitado pela troca de "ofertas" e "respostas" SDP (Session Description Protocol) entre os pares.
+
+---
+
+### 3. **Firebase**: Gerenciamento de Dados
+
+O **Firebase Firestore** é utilizado para persistir as salas e gerenciar a sinalização entre os participantes da chamada. O Firestore armazena:
+
+- **IDs das salas**: Quando um usuário cria uma sala, o `roomId` é salvo no Firestore, permitindo que outros participantes acessem a mesma sala ao usar esse ID.
+- **Mensagens de Sinalização**: As mensagens de sinalização (ofertas, respostas e candidatos ICE) são trocadas por meio do Firestore para facilitar a comunicação WebRTC entre os usuários.
 
 ---
 
