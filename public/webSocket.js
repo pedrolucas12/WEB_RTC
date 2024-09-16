@@ -1,9 +1,12 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+const port = process.env.PORT || 8080;
+const wss = new WebSocket.Server({
+    port
+});
 
 wss.on('connection', (ws) => {
     console.log('User connected');
-    
+
     ws.on('message', (message) => {
         // Broadcast the message to all connected clients
         wss.clients.forEach(client => {
@@ -18,4 +21,4 @@ wss.on('connection', (ws) => {
     });
 });
 
-console.log('WebSocket server running on ws://localhost:8080');
+console.log(`WebSocket server running on ws://localhost:${port}`);
