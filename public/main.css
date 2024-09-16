@@ -212,6 +212,7 @@ footer a:hover {
     background-color: #000623;
     color: white;
     border: none;
+    margin-left: -8px;
     border-radius: 5px;
     cursor: pointer;
 }
