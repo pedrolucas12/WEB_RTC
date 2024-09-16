@@ -184,7 +184,7 @@
     <script>
 
         const urlHost = window.location.host;
-        const wsUrl = (urlHost === 'webrt-f83c2.web.app') ? 'ws://web-rtc-i6u8.onrender.com:8080' : 'ws://localhost:8080';
+        const wsUrl = (urlHost === 'webrt-f83c2.web.app') ? 'wss://web-rtc-i6u8.onrender.com:8080' : 'ws://localhost:8080';
         const ws = new WebSocket(wsUrl);
         const messages = document.getElementById('messages');
         const messageInput = document.getElementById('messageInput');
@@ -227,7 +227,7 @@
         }
 
         // Adiciona um ouvinte de eventos ao campo de entrada
-        document.getElementById('messageInput').addEventListener('keydown', function(event) {
+        document.getElementById('messageInput').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Evita o comportamento padrão do Enter
                 sendMessage(); // Chama a função sendMessage() diretamente
